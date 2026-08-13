@@ -1,0 +1,26 @@
+name: Test Entra Federated Credentials
+
+on:
+  workflow_dispatch: # Allows you to trigger the test manually from the GitHub Actions UI
+
+permissions:
+  id-token: write      # Required to request the JWT token from GitHub's OIDC provider
+  contents: read       # Required for actions/checkout
+
+jobs:
+  test-federation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Azure via Entra ID Federation
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Verify Azure CLI Access
+        run: |
+          az account show
