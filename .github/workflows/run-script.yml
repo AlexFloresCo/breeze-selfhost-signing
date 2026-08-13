@@ -1,4 +1,19 @@
-name: git-bash
+- name: Run Bash Command with Options
   # You may pin to the exact commit or the version.
-  # uses: pkg-src/github-action-git-bash@d7e3f57b86fcf5d919a5ba685d459583735b7611
-  uses: pkg-src/github-action-git-bash@v1.1
+  # uses: equipez/run-bash-command@5d1f19b818439c4693a4f65a4181b5caedd5783b
+  uses: equipez/run-bash-command@v2.2
+  with:
+    # Time limit passed to (g)timeout (e.g., 300s, 45m, 2h).
+    timelimit: 
+    # Command(s) to run (multiline supported).
+    command: "${GITHUB_WORKSPACE}/scripts/generate-manifest-key.sh"
+    # Signal sent when the time limit is reached.
+    signal: # optional, default is TERM
+    # Delay before SIGKILL after sending --signal (e.g., 30s).
+    kill-after: # optional, default is 30s
+    # Working directory for running the command(s).
+    working-directory: # optional, default is 
+    # On macOS, install coreutils to provide gtimeout if missing.
+    install-coreutils: # optional, default is true
+    # If true, reduce log output.
+    quiet: # optional, default is false
