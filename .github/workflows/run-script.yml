@@ -1,2 +1,0 @@
-run: "${GITHUB_WORKSPACE}/scripts/generate-manifest-key.sh"
-    
